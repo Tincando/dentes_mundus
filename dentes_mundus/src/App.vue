@@ -3,7 +3,7 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
   <div class="container-fluid">
     <router-link to="/">
-        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap" ><image href="C:\Users\Pc1\dentes_mundus\dentes_mundus\zub.jpg" width="200" height="200" /></svg>
+        <svg class="bi me-2" width="50" height="50" role="img" aria-label="Bootstrap" ><image href="https://media.istockphoto.com/vectors/white-tooth-flat-design-vector-id912441172?k=20&m=912441172&s=612x612&w=0&h=s2w6vXvov4denJBMXKHvZ0woLx4Qh33kdg2dn8OGikg=" width="50"/></svg>
      </router-link>
     <a class="navbar-brand" href="#">Dentes Mundus</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,7 @@
           <router-link to="/">Home</router-link>
         </li>
         <li class="nav-item px-2">
-              <router-link to="/about">About</router-link>
+              <a href="#onama">About &raquo;</a>
         </li>
       </ul>
 
@@ -55,4 +55,16 @@
     box-shadow: inset 0 0.5em 1.5em rgb(0 0 0 / 10%), inset 0 0.125em 0.5em rgb(0 0 0 / 15%);
 }
 
+.pocetna{
+  width:100%;
+  height: 70%;
+  position: relative;
+  justify-content: center;
+
+}
+
+.container-uvod{
+  position: absolute;
+  top: 25%;
+}
 </style>

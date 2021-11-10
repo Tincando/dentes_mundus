@@ -2,7 +2,13 @@
   <div class="home">
      <div class="b-example-divider">
     </div>
+    <div class="d-flex pocetna">
+      <div class="container-uvod">
+        <h1> Odaberi svoj termin ? </h1>
+        <router-link to="/about" class="btn btn-success btn-lg"> Klikni ovdje </router-link>
+      </div>
     <img class="img-fluid" src="https://images.pexels.com/photos/287237/pexels-photo-287237.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" width="100%" height="70%">
+    </div>
   <div class="b-example-divider">
     </div>
     <div class="container">
@@ -36,7 +42,7 @@
     </div>
     </div>
      <hr class="featurette-divider">
-  <div class="container">
+  <div class="container" id="onama">
     <h1>O Nama </h1>
     <p>skupina zaljubljenika u stomatolgiju</p>
     <p>pojačajte svoj brand</p>
