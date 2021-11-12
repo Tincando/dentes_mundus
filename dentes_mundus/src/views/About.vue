@@ -15,6 +15,7 @@
       </div>
   </div>
     </div>
+  <div class="b-example-divider" />  
   </div>
 
 </template>

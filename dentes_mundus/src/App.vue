@@ -17,6 +17,9 @@
         <li class="nav-item px-2">
               <a href="#onama">About &raquo;</a>
         </li>
+        <li class="nav-item px-2">
+          <router-link to="/Termin">Termin</router-link>
+        </li>
       </ul>
 
       <div class="col-md-9 text-end">
