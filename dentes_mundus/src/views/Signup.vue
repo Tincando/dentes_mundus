@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm-6">
+          <h1>Sign up forma</h1>
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1" class="form-label"
@@ -72,14 +73,18 @@ export default {
     signup() {
       const auth = getAuth();
 
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-        .then(function () {
-          console.log("Uspješna registracija");
-        })
-        .catch(function (error) {
-          console.error("Došlo je do greške", alert(error));
-        });
-      console.log("Nastavak");
+      if (this.password != this.passwordRepeat) {
+        alert("lozinke nisu jednake");
+      } else {
+        createUserWithEmailAndPassword(auth, this.email, this.password)
+          .then(function () {
+            console.log("Uspješna registracija");
+          })
+          .catch(function (error) {
+            console.error("Došlo je do greške", alert(error));
+          });
+        console.log("Nastavak");
+      }
     },
   },
 };

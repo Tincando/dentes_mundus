@@ -62,7 +62,6 @@
               <router-link to="/Termin">Termin</router-link>
             </li>
           </ul>
-
           <div class="col-md-9 text-end">
             <a
               v-if="!store.currentUser"
@@ -84,7 +83,7 @@
             <a
               v-if="store.currentUser"
               href="#"
-              @click="logout()"
+              @click.prevent="logout()"
               type="button"
               class="btn btn-outline-primary"
               >Logout</a
@@ -139,19 +138,29 @@ a {
 <script>
 import { getAuth, onAuthStateChanged, signOut } from "@/firebase";
 import store from "@/store";
+import router from "@/router";
 
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
+  const currentRoute = router.currentRoute;
+
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
+    // User is signed in
     const uid = user.uid;
     console.log("***", user.email);
     store.currentUser = user.email;
+
+    if (!currentRoute.meta.needsAuth) {
+      router.push({ name: "About" });
+    }
   } else {
     // User is signed out
     console.log("*** No user");
     store.currentUser = null;
+
+    if (currentRoute.meta.needsAuth) {
+      router.push({ name: "Home" });
+    }
   }
 });
 

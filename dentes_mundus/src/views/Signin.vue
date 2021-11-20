@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm-6">
+          <h1>Login forma</h1>
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1" class="form-label"

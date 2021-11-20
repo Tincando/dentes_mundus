@@ -8,11 +8,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      needsAuth:false,
+    },
   },
   {
     path: '/about',
     name: 'About',
+    meta: {
+      needsAuth:true,
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -22,6 +28,9 @@ const routes = [
   {
     path: '/termin',
     name: 'Termin',
+    meta: {
+      needsAuth:true,
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -31,6 +40,9 @@ const routes = [
   {
     path: '/Signup',
     name: 'Signup',
+    meta: {
+      needsAuth:false,
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -40,6 +52,9 @@ const routes = [
   {
     path: '/Signin',
     name: 'Sigin',
+    meta: {
+      needsAuth:false,
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -54,4 +69,19 @@ const router = new VueRouter({
   routes
 })
 
-export default router
+import store from '@/store';
+
+router.beforeEach((to, from, next) => {
+  console.log('Bio sam na', from.name, 'idem na', to.name, 'a korisnik je', store.currentUser);
+  const authenticated = store.currentUser !== null;
+  if (!authenticated && to.meta.needsAuth) {
+  alert("you need to sign in first");
+  next('Signin');
+  } else {
+  next();
+  }
+ });
+
+
+
+export default router;
