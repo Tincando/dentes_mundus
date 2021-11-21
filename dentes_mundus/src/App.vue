@@ -61,6 +61,9 @@
             <li class="nav-item px-2">
               <router-link to="/Termin">Termin</router-link>
             </li>
+            <li class="nav-item px-2">
+              <router-link to="/Dodaj">Dodaj +</router-link>
+            </li>
           </ul>
           <div class="col-md-9 text-end">
             <a
