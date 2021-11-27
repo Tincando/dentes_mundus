@@ -55,6 +55,7 @@ export default {
       name: "",
       newImageUrl: "", // <-- url nove slike
       newImageDescription: "",
+      abbreviation: "",
     };
   },
   methods: {
@@ -62,6 +63,7 @@ export default {
       addDoc(collection(db, "posts"), {
         name: this.name,
         url: this.newImageUrl,
+        abbreviation: this.name,
         posted_at: Date.now(),
         desc: this.newImageDescription,
       })
@@ -70,6 +72,7 @@ export default {
           this.newImageUrl = "";
           this.newImageDescription = "";
           this.name = "";
+          this.abbreviation = "";
         })
         .catch((e) => {
           console.log(e);

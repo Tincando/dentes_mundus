@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "firebase/auth";
-import { getFirestore, collection, addDoc } from 'firebase/firestore/lite';
+import { getFirestore, collection, addDoc, doc, getDocs, query, where } from 'firebase/firestore';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,4 +26,4 @@ const auth = getAuth();
 const db = getFirestore(app);
 
 
-export {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut, collection,db,addDoc};
+export {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut, collection,db,addDoc, doc, getDocs,query, where,};
