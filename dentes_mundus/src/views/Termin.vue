@@ -1,21 +1,24 @@
 <template>
   <div class="termin">
     <div class="container">
-      <section class="doktor">
-        <h1>{{ doktor.id }}</h1>
+      <section v-for="card in cards" class="doktor">
+        <h1>{{ card.name }}</h1>
         <div class="row">
           <div class="col"></div>
           <div class="col-lg-6">
-            <div class="profil">
-              <img class="card-imgtop" />
-              <p style="text-align: center"></p>
+            <div class="container d-flex">
+              <div class="container justify-content.center">
+                <img class="container" :src="card.url" />
+              </div>
             </div>
             <hr class="featurette-divider" />
             <div class="lokacija">
-              <h2>Stavit cemo ime lokacije i ispod sliku lokacije</h2>
-              <p>{{ doktor.firstName }}</p>
+              <h2>{{ card.description }}</h2>
             </div>
-            <div class="slika_lok"></div>
+            <div class="container">
+              <h2>Adresa: {{ card.description }}</h2>
+              <h2>Telefonski broj: {{ card.id }}</h2>
+            </div>
             <div class="divider" />
             <div class="dropdown">
               <button
@@ -84,19 +87,25 @@ import { collection, getDocs, db, query, where } from "@/firebase";
 export default {
   data: function () {
     return {
-      cards: [], // postavljamo na prazno, punit ćemo iz Firebasea
+      cards: [],
+      id: "",
       name: "",
-      newImageUrl: "",
-      newImageDescription: "",
       doktorid: this.$route.params.cardid,
     };
   },
+  /*computed: {
+    doktor() {
+      return this.cards.filter((doktor) => doktor.id === this.doktorid);
+    },
+  },
+*/
   mounted() {
     this.getPosts();
   },
   methods: {
     getPosts() {
       let cards = [];
+
       console.log("firebase dohvat...");
 
       const test = getDocs(collection(db, "posts"));
@@ -116,16 +125,13 @@ export default {
 
           console.log("id", doc.id);
           console.log("name", data.name);
+          console.log("desc", data.description);
 
-          cards.push(card);
+          if (card.id == this.doktorid) {
+            this.cards.push(card);
+          }
         });
       });
-      console.log(cards);
-    },
-  },
-  computed: {
-    doktor() {
-      return cards.card.find((doktor) => doktor.id === this.doktorid);
     },
   },
 };

@@ -30,7 +30,7 @@
             <div class="form-group">
               <label for="imageDescription">Description</label>
               <input
-                v-model="newImageDescription"
+                v-model="description"
                 type="text"
                 class="form-control ml-2"
                 placeholder="Enter the image description"
@@ -54,8 +54,8 @@ export default {
     return {
       name: "",
       newImageUrl: "", // <-- url nove slike
-      newImageDescription: "",
       abbreviation: "",
+      description: "",
     };
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
         url: this.newImageUrl,
         abbreviation: this.name,
         posted_at: Date.now(),
-        desc: this.newImageDescription,
+        description: this.description,
       })
         .then((doc) => {
           console.log("Spremljeno", doc);
@@ -73,6 +73,7 @@ export default {
           this.newImageDescription = "";
           this.name = "";
           this.abbreviation = "";
+          this.description = "";
         })
         .catch((e) => {
           console.log(e);

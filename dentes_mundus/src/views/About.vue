@@ -8,19 +8,10 @@
     <div class="b-example-divider" />
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
-          <karticastom v-for="card in cards" :info="card" />
-        </div>
-        <div class="col-md-4">
-          <karticastom v-for="card in cards" :info="card" />
-        </div>
-        <div class="col-md-4">
-          <karticastom v-for="card in cards" :info="card" />
-        </div>
-
-        <div class="b-example-divider"></div>
+        <karticastom class="col-sm-4" v-for="card in cards" :info="card" />
       </div>
     </div>
+    <div class="b-example-divider"></div>
   </div>
 </template>
 
