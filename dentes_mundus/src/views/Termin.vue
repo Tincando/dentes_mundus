@@ -1,7 +1,7 @@
 <template>
   <div class="termin">
     <div class="container">
-      <section v-for="card in cards" class="doktor">
+      <section v-for="card in cards" :key="card.name" class="doktor">
         <h1>{{ card.name }}</h1>
         <div class="row">
           <div class="col"></div>
@@ -15,28 +15,16 @@
             <div class="lokacija">
               <h2>{{ card.description }}</h2>
             </div>
+            <div class="divider" />
             <div class="container">
               <h2>Adresa: {{ card.description }}</h2>
               <h2>Telefonski broj: {{ card.id }}</h2>
             </div>
             <div class="divider" />
-            <div class="dropdown">
-              <button
-                class="btn btn-lg btn-primary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Izaberi Termin
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
+            <hr class="featurette-divider" />
+            <div class="divider" />
+            <review></review>
+            <div class="divider" />
           </div>
           <div class="col"></div>
         </div>
@@ -81,10 +69,14 @@ export default {
   },
 };
 */
-
+import review from "@/components/review.vue";
 import { collection, getDocs, db, query, where } from "@/firebase";
 
 export default {
+  components: {
+    review,
+  },
+
   data: function () {
     return {
       cards: [],

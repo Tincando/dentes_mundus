@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "firebase/auth";
-import { getFirestore, collection, addDoc, doc, getDocs, query, where } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDocs, query, where, onSnapshot } from 'firebase/firestore';
+import { getDatabase,ref, set,push,onValue } from "firebase/database";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -15,7 +16,8 @@ const firebaseConfig = {
   storageBucket: "dentes-mundus.appspot.com",
   messagingSenderId: "357827395368",
   appId: "1:357827395368:web:b942724df4262c8b6e9a1d",
-  measurementId: "G-KNSVVZN4X3"
+  measurementId: "G-KNSVVZN4X3",
+  databaseURL:"https://dentes-mundus-default-rtdb.europe-west1.firebasedatabase.app/",
 };
 
 
@@ -24,6 +26,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+const database = getDatabase();
 
 
-export {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut, collection,db,addDoc, doc, getDocs,query, where};
+export {onSnapshot,getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut, collection,db,addDoc, doc, getDocs,query, where,getDatabase,ref, set,push,onValue};

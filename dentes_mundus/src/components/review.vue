@@ -1,0 +1,242 @@
+<template>
+  <div class="container">
+    <div class="container review" v-for="review in reviews" :key="review.code">
+      <h4 class="uppercase">Customer Reviews</h4>
+      <div class="reviews">
+        <p>{{ review.reviewer }}</p>
+        <div class="row">
+          <div class="columns medium-7">
+            <h5>{{ review.content }}</h5>
+          </div>
+          <div class="columns medium-5">
+            <h5 class="pull-right">{{}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="featurette-divider" />
+    <form @submit.prevent="postNewreview">
+      <div class="form-group">
+        <div class="mb-3">
+          <label for="content" class="form-label">
+            Komentar
+            <textarea
+              v-model="content"
+              id="content"
+              class="form-control"
+              rows="3"
+              cols="100"
+            ></textarea>
+          </label>
+        </div>
+        <div class="mb-3">
+          <label for="reviewer">
+            Ime
+            <input
+              id="reviewer"
+              class="form-control"
+              v-model="reviewer"
+              type="text"
+            />
+          </label>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<style scoped>
+.container {
+  padding: 0 20px;
+}
+.review {
+  border: 1px solid #ddd;
+  font-size: 0.95em;
+  padding: 10px;
+  margin: 15px 0 5px 0;
+}
+.review h5 {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 0.7em;
+}
+.pull-right {
+  float: right;
+}
+.review-form {
+  margin-top: 30px;
+  border-top: 1px solid #ddd;
+  padding: 15px 0 0 0;
+}
+</style>
+
+<script>
+import {
+  addDoc,
+  db,
+  getDocs,
+  collection,
+  query,
+  where,
+  onSnapshot,
+} from "@/firebase";
+
+export default {
+  name: "review",
+
+  data: function () {
+    return {
+      reviews: [],
+      content: "",
+      reviewer: "",
+      id: this.$route.params.cardid,
+    };
+  },
+  /*
+  computed: {
+    rs() {
+      return this.reviews.filter((review) => {
+        return review.id === this.id;
+      });
+    },
+  },
+*/
+
+  methods: {
+    /*
+    writeUserData() {
+      const db = getDatabase();
+
+      const postListRef = ref(db, "reviews");
+
+      const newPostRef = push(postListRef);
+
+      set(newPostRef, {
+        reviewer: this.reviewer,
+        content: this.content,
+        id: this.id,
+      })
+        .then((doc) => {
+          console.log("Spremljeno", doc);
+          this.content = "";
+          this.reviewer = "";
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    getreview() {
+      let reviews = [];
+      const db = getDatabase();
+      const dbRef = ref(db, "reviews");
+      onValue(
+        dbRef,
+        (snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            let key = childSnapshot.key;
+            const data = childSnapshot.val();
+
+            let review = {
+              id: data.id,
+              content: data.content,
+              reviewer: data.reviewer,
+            };
+
+            console.log(data.id);
+            console.log(data.content);
+
+            this.reviews.unshift(review);
+          });
+        },
+        {
+          onlyOnce: true,
+        }
+      );
+    },
+    suscribe() {
+      const db = getDatabase();
+      const commentsRef = ref(db, "reviews");
+
+      onChildAdded(commentsRef, (data) => {
+        addCommentElement(
+          postElement,
+          data.id,
+          data.val().content,
+          data.val().reviewer
+        );
+      });
+    },
+  },
+};
+*/
+    postNewreview() {
+      addDoc(collection(db, "reviews"), {
+        reviewer: this.reviewer,
+        content: this.content,
+        id: this.id,
+      })
+        .then((doc) => {
+          console.log("Spremljeno", doc);
+          this.content = "";
+          this.reviewer = "";
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
+    async getreview() {
+      let reviews = [];
+
+      console.log("firebase dohvat...");
+
+      const test = await getDocs(collection(db, "reviews"));
+
+      test.forEach((doc) => {
+        let id = doc.id;
+        let data = doc.data();
+
+        let review = {
+          id: data.id,
+          content: data.content,
+          reviewer: data.reviewer,
+        };
+        if (review.id == this.id) {
+          this.reviews.unshift(review);
+        }
+      });
+
+      //console.log(this.reviews);
+    },
+  },
+  mounted() {
+    let viewMessage = this;
+    console.log("firebase dohvat...");
+
+    const q = query(collection(db, "reviews"));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let reviews = [];
+      querySnapshot.forEach((doc) => {
+        let id = doc.id;
+        let data = doc.data();
+
+        if (data.id == this.id) {
+          let review = {
+            key: doc.id,
+            id: data.id,
+            content: data.content,
+            reviewer: data.reviewer,
+          };
+          console.log("id", doc.id);
+          reviews.unshift(review);
+        }
+      });
+      console.log("current rewies are", reviews.join(", "));
+      this.reviews = reviews;
+      console.log(this.reviews);
+    });
+  },
+};
+</script>
