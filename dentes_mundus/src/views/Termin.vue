@@ -8,19 +8,25 @@
           <div class="col-lg-6">
             <div class="container d-flex">
               <div class="container justify-content.center">
-                <img class="container" :src="card.url" />
+                <img class="container profil" :src="card.url" />
               </div>
             </div>
             <hr class="featurette-divider" />
             <div class="lokacija">
-              <h2>{{ card.description }}</h2>
+              <h2>Opis:</h2>
+              <h4>{{ card.description }}</h4>
             </div>
             <div class="divider" />
             <div class="container">
-              <h2>Adresa: {{ card.description }}</h2>
-              <h2>Telefonski broj: {{ card.id }}</h2>
+              <h2>Adresa:</h2>
+              <h4>{{ card.adress }}</h4>
+              <h2>Telefonski broj:</h2>
+              <h4>{{ card.telephone }}</h4>
             </div>
             <div class="divider" />
+
+            <hr class="featurette-divider" />
+            <usluge></usluge>
             <hr class="featurette-divider" />
             <div class="divider" />
             <review></review>
@@ -35,19 +41,13 @@
 
 <style lang="scss" scoped>
 .profil {
-  height: 350px;
-  width: 350px;
+  height: 90%;
+  width: 90%;
   border-radius: 25%;
 }
 
 .divider {
   height: 50px;
-}
-
-.slika_lok {
-  height: 150px;
-  width: 100%;
-  background-color: rgb(163, 165, 240);
 }
 </style>
 
@@ -71,10 +71,12 @@ export default {
 */
 import review from "@/components/review.vue";
 import { collection, getDocs, db, query, where } from "@/firebase";
+import usluge from "../components/usluge.vue";
 
 export default {
   components: {
     review,
+    usluge,
   },
 
   data: function () {
@@ -113,6 +115,8 @@ export default {
             url: data.url,
             time: data.posted_at,
             description: data.description,
+            telephone: data.telephone,
+            adress: data.adress,
           };
 
           console.log("id", doc.id);

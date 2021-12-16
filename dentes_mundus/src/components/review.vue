@@ -1,7 +1,10 @@
 <template>
   <div class="container">
+    <h2>Ostavi mišljenje:</h2>
+    <div class="divider"></div>
     <div class="container review" v-for="review in reviews" :key="review.code">
       <h4 class="uppercase">Customer Reviews</h4>
+      <h5>Ocjena: {{ review.ocjena }}</h5>
       <div class="reviews">
         <p>{{ review.reviewer }}</p>
         <div class="row">
@@ -9,7 +12,7 @@
             <h5>{{ review.content }}</h5>
           </div>
           <div class="columns medium-5">
-            <h5 class="pull-right">{{}}</h5>
+            <h5 class="pull-right">{{ review.time }}</h5>
           </div>
         </div>
       </div>
@@ -17,6 +20,17 @@
     <hr class="featurette-divider" />
     <form @submit.prevent="postNewreview">
       <div class="form-group">
+        <label for="customRange2" class="form-label">Ocjena</label>
+        <p>{{ ocjena }}</p>
+        <input
+          v-model.number="ocjena"
+          type="range"
+          class="form-range"
+          min="1"
+          max="5"
+          id="customRange2"
+        />
+
         <div class="mb-3">
           <label for="content" class="form-label">
             Komentar
@@ -47,6 +61,10 @@
 </template>
 
 <style scoped>
+.divider {
+  height: 25px;
+}
+
 .container {
   padding: 0 20px;
 }
@@ -78,6 +96,8 @@ import {
   getDocs,
   collection,
   query,
+  setDoc,
+  doc,
   where,
   onSnapshot,
 } from "@/firebase";
@@ -90,6 +110,8 @@ export default {
       reviews: [],
       content: "",
       reviewer: "",
+      ocjena: 0,
+      prosjek: 0,
       id: this.$route.params.cardid,
     };
   },
@@ -175,15 +197,23 @@ export default {
         reviewer: this.reviewer,
         content: this.content,
         id: this.id,
+        ocjena: this.ocjena,
+        time: new Date().toLocaleDateString(),
       })
         .then((doc) => {
           console.log("Spremljeno", doc);
           this.content = "";
           this.reviewer = "";
+          this.ocjena = "";
         })
         .catch((e) => {
           console.log(e);
         });
+
+      // za prosjek
+      const postref = doc(db, "posts", this.id);
+
+      setDoc(postref, { prosjek: this.prosjek }, { merge: true });
     },
 
     async getreview() {
@@ -201,6 +231,8 @@ export default {
           id: data.id,
           content: data.content,
           reviewer: data.reviewer,
+          time: new Date().toLocaleDateString(),
+          ocjena: data.ocjena,
         };
         if (review.id == this.id) {
           this.reviews.unshift(review);
@@ -212,6 +244,9 @@ export default {
   },
   mounted() {
     let viewMessage = this;
+    let sum = 0;
+    let prosjek = 0;
+    let duljina = 0;
     console.log("firebase dohvat...");
 
     const q = query(collection(db, "reviews"));
@@ -228,13 +263,18 @@ export default {
             id: data.id,
             content: data.content,
             reviewer: data.reviewer,
+            ocjena: data.ocjena,
+            time: data.time,
           };
-          console.log("id", doc.id);
+
+          sum += review.ocjena;
+          duljina = console.log("id", doc.id);
           reviews.unshift(review);
         }
       });
       console.log("current rewies are", reviews.join(", "));
       this.reviews = reviews;
+      this.prosjek = sum / reviews.length;
       console.log(this.reviews);
     });
   },
