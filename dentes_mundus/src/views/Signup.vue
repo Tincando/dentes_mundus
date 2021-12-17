@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm-6">
-          <h1>Sign up forma</h1>
+          <h1>Sign up forma za pacijenta</h1>
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1" class="form-label"
@@ -48,6 +48,10 @@
               Sign up
             </button>
           </form>
+          <div class="b-example-divider"></div>
+          <router-link to="/Signupdoc" class="btn btn-primary"
+            >Doktor</router-link
+          >
         </div>
         <div class="col-sm"></div>
       </div>

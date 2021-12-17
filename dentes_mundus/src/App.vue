@@ -59,7 +59,14 @@
               <a href="#onama">About &raquo;</a>
             </li>
             <li class="nav-item px-2">
-              <router-link to="/Termin">Termin</router-link>
+              <router-link
+                :to="{
+                  name: 'Profil',
+                  params: { userid: store.currentUserid },
+                }"
+              >
+                Profil
+              </router-link>
             </li>
             <li class="nav-item px-2">
               <router-link to="/Dodaj">Dodaj +</router-link>
@@ -139,7 +146,15 @@ a {
 </style>
 
 <script>
-import { getAuth, onAuthStateChanged, signOut } from "@/firebase";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  collection,
+  db,
+  query,
+  onSnapshot,
+} from "@/firebase";
 import store from "@/store";
 import router from "@/router";
 
@@ -152,6 +167,7 @@ onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     console.log("***", user.email);
     store.currentUser = user.email;
+    store.currentUserid = uid;
 
     if (!currentRoute.meta.needsAuth) {
       router.push({ name: "About" });
@@ -160,6 +176,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed out
     console.log("*** No user");
     store.currentUser = null;
+    store.Userrole = null;
 
     if (currentRoute.meta.needsAuth) {
       router.push({ name: "Home" });
@@ -174,10 +191,33 @@ export default {
       store,
     };
   },
+  mounted() {
+    console.log("firebase dohvat...");
+
+    const q = query(collection(db, "posts"));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        let id = doc.id;
+        let data = doc.data();
+
+        let card = {
+          email: data.email,
+          role: data.role,
+        };
+
+        if (card.role == "doc" && card.email == store.currentUser) {
+          store.Userrole = "doc";
+        }
+      });
+    });
+  },
+
   methods: {
     logout() {
       signOut(auth).then(() => {
         this.$router.push({ name: "Sigin" });
+        this.cards = [];
       });
     },
   },

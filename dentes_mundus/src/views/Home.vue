@@ -55,6 +55,7 @@ export default {
   },
   mounted() {
     this.getreview();
+    this.test();
     //this.getbiggest();
   },
 

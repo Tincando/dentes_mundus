@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "firebase/auth";
-import { getFirestore, collection, addDoc, doc, getDocs, query, where, onSnapshot, setDoc} from 'firebase/firestore';
-import { getDatabase,ref, set,push,onValue } from "firebase/database";
+import { getFirestore, collection, addDoc, doc, getDocs, query, where, onSnapshot, setDoc,getDoc} from 'firebase/firestore';
+import { getDatabase,ref, set,push,onValue,child, get } from "firebase/database";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -29,4 +29,4 @@ const db = getFirestore(app);
 const database = getDatabase();
 
 
-export {setDoc,onSnapshot,getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut, collection,db,addDoc, doc, getDocs,query, where,getDatabase,ref, set,push,onValue};
+export {getDoc,setDoc,onSnapshot,getAuth,onAuthStateChanged,child, get,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut, collection,db,addDoc, doc, getDocs,query, where,getDatabase,ref, set,push,onValue};

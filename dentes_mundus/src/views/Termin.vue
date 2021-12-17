@@ -72,6 +72,7 @@ export default {
 import review from "@/components/review.vue";
 import { collection, getDocs, db, query, where } from "@/firebase";
 import usluge from "../components/usluge.vue";
+import store from "@/store";
 
 export default {
   components: {
@@ -85,6 +86,7 @@ export default {
       id: "",
       name: "",
       doktorid: this.$route.params.cardid,
+      user: store.currentUser,
     };
   },
   /*computed: {
