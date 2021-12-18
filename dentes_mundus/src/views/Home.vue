@@ -2,7 +2,19 @@
   <div class="home">
     <div class="b-example-divider"></div>
     <div class="d-flex pocetna">
-      <div class="container-uvod">
+      <div class="container-uvod" v-if="store.Userrole == 'doc'">
+        <h1>Pogledaj naručene pacijente?</h1>
+        <router-link
+          :to="{
+            name: 'Profil',
+            params: { userid: store.currentUserid },
+          }"
+          class="btn btn-success btn-lg"
+        >
+          Profil
+        </router-link>
+      </div>
+      <div class="container-uvod" v-else>
         <h1>Odaberi svoj termin ?</h1>
         <router-link to="/about" class="btn btn-success btn-lg">
           Klikni ovdje
@@ -41,6 +53,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import top3 from "@/components/top3.vue";
 import { collection, getDocs, db } from "@/firebase";
+import store from "@/store";
 
 export default {
   name: "Home",
@@ -50,6 +63,7 @@ export default {
   },
   data: function () {
     return {
+      store,
       cards: [],
     };
   },

@@ -170,12 +170,14 @@ onAuthStateChanged(auth, (user) => {
     store.currentUserid = uid;
 
     if (!currentRoute.meta.needsAuth) {
-      router.push({ name: "About" });
+      router.push({ name: "Home" });
     }
   } else {
     // User is signed out
     console.log("*** No user");
     store.currentUser = null;
+    store.Userrole = null;
+    store.currentUserid = null;
     store.Userrole = null;
 
     if (currentRoute.meta.needsAuth) {
@@ -191,33 +193,35 @@ export default {
       store,
     };
   },
-  mounted() {
-    console.log("firebase dohvat...");
-
-    const q = query(collection(db, "posts"));
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        let id = doc.id;
-        let data = doc.data();
-
-        let card = {
-          email: data.email,
-          role: data.role,
-        };
-
-        if (card.role == "doc" && card.email == store.currentUser) {
-          store.Userrole = "doc";
-        }
-      });
-    });
+  beforeUpdate() {
+    this.test123();
   },
 
   methods: {
     logout() {
       signOut(auth).then(() => {
         this.$router.push({ name: "Sigin" });
-        this.cards = [];
+      });
+    },
+    test123() {
+      console.log("firebase dohvat...");
+
+      const q = query(collection(db, "posts"));
+
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          let id = doc.id;
+          let data = doc.data();
+
+          let card = {
+            email: data.email,
+            role: data.role,
+          };
+
+          if (card.role == "doc" && card.email == store.currentUser) {
+            store.Userrole = "doc";
+          }
+        });
       });
     },
   },

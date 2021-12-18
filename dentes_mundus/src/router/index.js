@@ -11,6 +11,7 @@ const routes = [
     component: Home,
     meta: {
       needsAuth:false,
+      roll:"doc"
     },
   },
   {
