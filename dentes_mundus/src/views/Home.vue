@@ -79,7 +79,7 @@ export default {
 
       console.log("firebase dohvat...");
 
-      const test = getDocs(collection(db, "posts"));
+      const test = getDocs(collection(db, "doktori"));
 
       test.then((results) => {
         results.forEach((doc) => {
@@ -100,7 +100,7 @@ export default {
         this.cards.sort(function (a, b) {
           return b.prosjek - a.prosjek;
         });
-        this.cards.length = 3;
+        this.cards.slice(0, 3);
       });
       //console.log(this.reviews);
     },

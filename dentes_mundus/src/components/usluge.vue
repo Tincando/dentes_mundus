@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="form-group" @submit.prevent="gettest()">
+    <form class="form-group" @submit.prevent="dodajuslugu">
       <h2>Rezerviraj Termin :</h2>
       <div class="container usluge">
         <!-- test sa kalendarom
@@ -87,11 +87,14 @@ input[type="number"] {
 </style> >
 
 <script>
+import store from "@/store";
+import { collection, addDoc, db } from "@/firebase";
 export default {
   name: "usluge",
 
   data: function () {
     return {
+      store,
       usluge: [],
       dani: [],
       vrijeme: "",
@@ -128,6 +131,24 @@ export default {
   },
 
   methods: {
+    dodajuslugu() {
+      addDoc(collection(db, "rezervacije"), {
+        name: store.currentUser,
+        dani: this.dani,
+        posted_at: Date.now(),
+        vrijeme: this.vrijeme,
+        usluge: this.usluge,
+        docid: this.id,
+      })
+        .then((doc) => {
+          console.log("Spremljeno", doc);
+          (this.dani = ""), (this.vrijeme = ""), (this.usluge = "");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
     gettest() {
       alert(this.usluge + "Zakazani datum je: " + this.datum);
     },

@@ -49,7 +49,7 @@ export default {
 
       console.log("firebase dohvat...");
 
-      const test = getDocs(collection(db, "posts"));
+      const test = getDocs(collection(db, "doktori"));
 
       test.then((results) => {
         results.forEach((doc) => {

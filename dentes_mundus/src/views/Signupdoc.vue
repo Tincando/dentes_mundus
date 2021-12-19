@@ -153,7 +153,7 @@ export default {
             console.error("Došlo je do greške", alert(error));
           });
       }
-      addDoc(collection(db, "posts"), {
+      addDoc(collection(db, "doktori"), {
         name: this.name,
         url: this.newImageUrl,
         posted_at: Date.now(),

@@ -68,6 +68,7 @@
                 Profil
               </router-link>
             </li>
+            <!-- ovo ce vjerovatno bit izbrisi profil -->
             <li class="nav-item px-2">
               <router-link to="/Dodaj">Dodaj +</router-link>
             </li>
@@ -206,7 +207,7 @@ export default {
     test123() {
       console.log("firebase dohvat...");
 
-      const q = query(collection(db, "posts"));
+      const q = query(collection(db, "doktori"));
 
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -216,10 +217,12 @@ export default {
           let card = {
             email: data.email,
             role: data.role,
+            docid: doc.id,
           };
 
           if (card.role == "doc" && card.email == store.currentUser) {
             store.Userrole = "doc";
+            store.docid = card.docid;
           }
         });
       });

@@ -211,7 +211,7 @@ export default {
         });
 
       // za prosjek
-      const postref = doc(db, "posts", this.id);
+      const postref = doc(db, "doktori", this.id);
 
       setDoc(postref, { prosjek: this.prosjek }, { merge: true });
     },

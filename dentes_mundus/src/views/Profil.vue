@@ -3,6 +3,7 @@
     <div class="b-example-divider"></div>
     <div class="container" v-for="card in cards" :key="card.id">
       <h1>Moj profil</h1>
+      <h3>id: {{ card.id }}</h3>
       <h3>Ime: {{ card.name }}</h3>
       <div class="container justify-content.center">
         <img class="container profil" :src="card.url" />
@@ -10,9 +11,13 @@
 
       <h3>Broj telefona: {{ card.telephone }}</h3>
       <h3>O meni: {{ card.description }}</h3>
-      <div class="container termini">
-        <h2>Naručeni:</h2>
-      </div>
+    </div>
+    <div class="container termini" v-for="rez in rezerve" :key="rez.docid">
+      <h2>Naručeni:</h2>
+      <h1>ime: {{ rez.name }}</h1>
+      <h2>odabrane usluge : {{ rez.usluge }}</h2>
+      <h3>dan : {{ rez.dan }}</h3>
+      <h3>Vrijeme termina : {{ rez.vrijeme }}</h3>
     </div>
   </div>
 </template>
@@ -39,10 +44,12 @@ export default {
       store,
       cards: [],
       pacijenti: [],
+      rezerve: [],
     };
   },
   mounted() {
     this.getPosts();
+    this.getrezervacije();
   },
   methods: {
     getPosts() {
@@ -50,7 +57,7 @@ export default {
 
       console.log("firebase dohvat...");
 
-      const test = getDocs(collection(db, "posts"));
+      const test = getDocs(collection(db, "doktori"));
 
       test.then((results) => {
         results.forEach((doc) => {
@@ -79,12 +86,12 @@ export default {
         });
       });
     },
-    getPosts() {
-      let cards = [];
+    getrezervacije() {
+      let rez = [];
 
       console.log("firebase dohvat...");
 
-      const test = getDocs(collection(db, "posts"));
+      const test = getDocs(collection(db, "rezervacije"));
 
       test.then((results) => {
         results.forEach((doc) => {
@@ -92,23 +99,20 @@ export default {
           let data = doc.data();
 
           let card = {
-            id: doc.id,
             name: data.name,
-            url: data.url,
+            dan: data.dani,
             time: data.posted_at,
-            description: data.description,
-            telephone: data.telephone,
-            adress: data.adress,
-            role: data.role,
-            email: data.email,
+            vrijeme: data.vrijeme,
+            usluge: data.usluge,
+            docid: data.docid,
           };
 
           console.log("id", doc.id);
           console.log("name", data.name);
           console.log("desc", data.description);
 
-          if (store.currentUser == card.email) {
-            this.cards.push(card);
+          if (store.docid == card.docid) {
+            this.rezerve.push(card);
           }
         });
       });
