@@ -32,8 +32,13 @@ U aplikaciji se prije prijave može odabrati dali ste doktor ili se prijavljujet
 
 ## Test user
 
-Email: test@user.com <br />
+Pacijent <br />
+Email: pacijent@test.com <br />
 Password: 123456
+<br />
+Doktor<br />
+Email : doktor@test.com <br />
+Password:654321
 
 ## Dodaci
 
