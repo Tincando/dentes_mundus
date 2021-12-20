@@ -39,15 +39,3 @@ Password: 123456
 Doktor<br />
 Email : doktor@test.com <br />
 Password:654321
-
-## Dodaci
-
-### Firebase functions
-
-npm install -g firebase-tools <br />
-firebase login <br />
-firebase init functions <br />
-
-#### Deploy:
-
-firebase deploy --only functions <br />
