@@ -113,6 +113,7 @@ export default {
       ocjena: 0,
       prosjek: 0,
       id: this.$route.params.cardid,
+      sum: 0,
     };
   },
   /*
@@ -267,15 +268,15 @@ export default {
             time: data.time,
           };
 
-          sum += review.ocjena;
-          duljina = console.log("id", doc.id);
+          this.sum += review.ocjena;
+
           reviews.unshift(review);
         }
       });
       console.log("current rewies are", reviews.join(", "));
       this.reviews = reviews;
-      this.prosjek = sum / reviews.length;
       console.log(this.reviews);
+      this.prosjek = this.sum / reviews.length;
     });
   },
 };

@@ -4,28 +4,22 @@
     <div class="d-flex pocetna">
       <div class="container-uvod" v-if="store.Userrole == 'doc'">
         <h1>Pogledaj naručene pacijente?</h1>
+
         <router-link
+          class="btn btn-success btn-lg"
           :to="{
             name: 'Profil',
             params: { userid: store.currentUserid },
           }"
-          class="btn btn-success btn-lg"
         >
           Profil
         </router-link>
       </div>
       <div class="container-uvod" v-else>
         <h1>Odaberi svoj termin ?</h1>
-        <router-link to="/about" class="btn btn-success btn-lg">
-          Klikni ovdje
-        </router-link>
+        <router-link to="/about" class="btn btn-lg"> Klikni ovdje </router-link>
       </div>
-      <img
-        class="img-fluid"
-        src="https://images.pexels.com/photos/287237/pexels-photo-287237.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        width="100%"
-        height="70%"
-      />
+      <img class="img-fluid" src="@/assets/backtest3.jpg" width="100%" />
     </div>
     <div class="b-example-divider"></div>
     <div class="container">
@@ -47,6 +41,19 @@
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+.container-uvod h1 {
+  color: rgb(0, 0, 0);
+  font-size: 3vw;
+}
+
+.btn {
+  background-color: rgb(96, 193, 231);
+  color: white;
+  font-size: 2vw;
+  border: none;
+}
+</style>
 
 <script>
 // @ is an alias to /src

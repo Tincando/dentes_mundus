@@ -8,27 +8,20 @@
         flex-wrap
         align-items-center
         justify-content-center justify-content-md-between
-        py-3
-        mb-4
-        border-bottom
       "
     >
       <div class="container-fluid">
         <router-link to="/">
-          <svg
-            class="bi me-2"
+          <img
+            class="bi me-4"
+            style="border-radius: 50%"
+            src="./assets/zub1.png"
             width="50"
-            height="50"
-            role="img"
-            aria-label="Bootstrap"
-          >
-            <image
-              href="https://media.istockphoto.com/vectors/white-tooth-flat-design-vector-id912441172?k=20&m=912441172&s=612x612&w=0&h=s2w6vXvov4denJBMXKHvZ0woLx4Qh33kdg2dn8OGikg="
-              width="50"
-            />
-          </svg>
+          />
         </router-link>
-        <a class="navbar-brand" href="#">Dentes Mundus</a>
+        <a class="navbar-brand"
+          ><router-link to="/">Dentes Mundus</router-link>
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -55,9 +48,7 @@
             <li class="nav-item px-2">
               <router-link to="/">Home</router-link>
             </li>
-            <li class="nav-item px-2">
-              <a href="#onama">About &raquo;</a>
-            </li>
+
             <li class="nav-item px-2">
               <router-link
                 :to="{
@@ -69,20 +60,15 @@
               </router-link>
             </li>
             <!-- ovo ce vjerovatno bit izbrisi profil -->
-            <li class="nav-item px-2">
-              <router-link to="/Dodaj">Dodaj +</router-link>
-            </li>
+            <li class="nav-item px-2"></li>
           </ul>
+
           <div class="col-md-9 text-end">
             <a
               v-if="!store.currentUser"
               type="button"
-              class="btn btn-outline-primary"
-              ><router-link
-                to="/Signin"
-                style="color: blue; text-decoration: none"
-                >Login</router-link
-              ></a
+              class="btn btn-outline-primary login"
+              ><router-link to="/Signin">Login</router-link></a
             >
             <a v-if="!store.currentUser" type="button" class="btn btn-primary"
               ><router-link
@@ -96,7 +82,7 @@
               href="#"
               @click.prevent="logout()"
               type="button"
-              class="btn btn-outline-primary"
+              class="btn btn-outline-primary logout"
               >Logout</a
             >
           </div>
@@ -113,15 +99,40 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
 a {
   font-weight: bold;
-  color: #6e51d6;
+  color: rgb(96, 193, 231);
+  text-decoration: none;
+}
+a:hover {
+  font-size: 21px;
+  color: rgb(214, 83, 83);
+}
 
-  &.router-link-exact-active {
-    color: #42b983;
-  }
+.logout {
+  color: rgb(96, 193, 231);
+  border-color: rgb(96, 193, 231);
+}
+.logout:hover {
+  background-color: rgb(214, 83, 83);
+  color: white;
+  border-color: black;
+}
+
+.login {
+  color: rgb(96, 193, 231);
+  border-color: rgb(96, 193, 231);
+}
+.login:hover {
+  background-color: rgb(214, 83, 83);
+  color: white;
+  border-color: black;
+}
+
+.navbar-nav {
+  font-size: 20px;
 }
 
 .b-example-divider {
