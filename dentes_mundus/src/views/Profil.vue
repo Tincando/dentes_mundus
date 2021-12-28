@@ -1,16 +1,18 @@
 <template>
   <div>
     <div class="b-example-divider"></div>
-    <div class="container" v-for="card in cards" :key="card.id">
-      <h1>Moj profil</h1>
-      <h3>id: {{ card.id }}</h3>
-      <h3>Ime: {{ card.name }}</h3>
-      <div class="container justify-content.center">
-        <img class="container profil" :src="card.url" />
-      </div>
+    <div class="container main">
+      <div class="container" v-for="card in cards" :key="card.id">
+        <h1>Moj profil</h1>
+        <h3>id: {{ card.id }}</h3>
+        <h3>Ime: {{ card.name }}</h3>
+        <div class="container justify-content.center">
+          <img class="container profil" :src="card.url" />
+        </div>
 
-      <h3>Broj telefona: {{ card.telephone }}</h3>
-      <h3>O meni: {{ card.description }}</h3>
+        <h3>Broj telefona: {{ card.telephone }}</h3>
+        <h3>O meni: {{ card.description }}</h3>
+      </div>
     </div>
     <div class="container termini" v-for="rez in rezerve" :key="rez.docid">
       <h2>Naručeni:</h2>
@@ -22,6 +24,11 @@
   </div>
 </template>
 <style lang="scss" scoped>
+.main {
+  border: solid black;
+  padding: 50px 0px;
+}
+
 .profil {
   margin: auto;
   max-height: 400px;

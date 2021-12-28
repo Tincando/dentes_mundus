@@ -3,7 +3,7 @@
     <div class="b-example-divider"></div>
     <div class="d-flex pocetna">
       <div class="container-uvod" v-if="store.Userrole == 'doc'">
-        <h1>Pogledaj naručene pacijente?</h1>
+        <h1>POGLEDAJ NARUČENE PACIJENTE?</h1>
 
         <router-link
           class="btn btn-success btn-lg"
@@ -16,14 +16,16 @@
         </router-link>
       </div>
       <div class="container-uvod" v-else>
-        <h1>Odaberi svoj termin ?</h1>
+        <h1>ODABERI SVOJ TERMIN?</h1>
         <router-link to="/about" class="btn btn-lg"> Klikni ovdje </router-link>
       </div>
       <img class="img-fluid" src="@/assets/backtest3.jpg" width="100%" />
     </div>
     <div class="b-example-divider"></div>
     <div class="container">
-      <h1>Ocjene najboljih stomatologa</h1>
+      <div class="divider"></div>
+      <h1 style="color: rgb(96, 193, 231)">Ocjene najboljih stomatologa</h1>
+      <div class="divider"></div>
     </div>
 
     <div class="container marketing">
@@ -31,20 +33,35 @@
       <div class="row">
         <top3 v-for="card in cards" :info="card" :key="card.id" />
       </div>
-      <hr class="featurette-divider" />
-      <div class="container" id="onama">
-        <h1>O Nama</h1>
-        <p>skupina zaljubljenika u stomatolgiju</p>
-        <p>pojačajte svoj brand</p>
-        <p>zašto ne</p>
-      </div>
     </div>
+
+    <hr class="featurette-divider" />
+    <div class="container" id="onama">
+      <h1>O Nama</h1>
+      <p>skupina zaljubljenika u stomatolgiju</p>
+      <p>pojačajte svoj brand</p>
+      <p>zašto ne</p>
+    </div>
+    <div class="b-example-divider"></div>
   </div>
 </template>
 <style lang="scss" scoped>
 .container-uvod h1 {
-  color: rgb(0, 0, 0);
+  color: rgb(39, 111, 139);
+  text-shadow: 2px 2px 4px #000000;
   font-size: 3vw;
+}
+
+.divider {
+  height: 60px;
+}
+
+.btn {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn:hover {
+  box-shadow: 0 4px 8px 0 rgb(39, 111, 139), 0 6px 20px 0 rgb(67, 166, 206);
 }
 
 .btn {

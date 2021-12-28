@@ -72,7 +72,7 @@
             >
             <a v-if="!store.currentUser" type="button" class="btn btn-primary"
               ><router-link
-                to="/Signup"
+                to="/Signuppage"
                 style="color: white; text-decoration: none"
                 >Sign up</router-link
               ></a
