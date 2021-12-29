@@ -1,25 +1,27 @@
 <template>
   <div class="about">
-    <section class="jumbotron text-center" style="height: 150px">
+    <section class="jumbotron text-center">
       <div class="container">
         <h1 class="jumbotron-heading">Odaberi svog Stomatologa</h1>
       </div>
     </section>
     <div class="b-example-divider" />
-    <div class="container">
+    <div class="container odabir">
       <div class="row">
-        <karticastom
-          class="col-sm-4"
-          v-for="card in cards"
-          :info="card"
-          :key="card.id"
-        />
+        <karticastom v-for="card in cards" :info="card" :key="card.id" />
       </div>
     </div>
     <div class="b-example-divider"></div>
   </div>
 </template>
-
+<style lang="scss" scoped>
+.odabir {
+  padding: 50px;
+}
+.jumbotron {
+  padding: 50px;
+}
+</style>
 
 <script>
 import karticastom from "@/components/karticastom.vue";

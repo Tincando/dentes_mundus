@@ -121,10 +121,10 @@ export default {
 
           this.cards.unshift(card);
         });
-        this.cards.sort(function (a, b) {
+        this.cards = this.cards.sort(function (a, b) {
           return b.prosjek - a.prosjek;
         });
-        this.cards.slice(0, 3);
+        this.cards = this.cards.slice(0, 3);
       });
       //console.log(this.reviews);
     },
