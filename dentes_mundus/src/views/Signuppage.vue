@@ -48,7 +48,7 @@
 }
 .signup {
   color: rgb(255, 255, 255);
-  background-color: rgb(201, 227, 247);
+  //background-color: rgb(201, 227, 247);
 }
 .pacijent {
   padding: 50px;
