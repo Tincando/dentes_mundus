@@ -26,38 +26,30 @@
         </div>
       </div>
     </div>
-    <!--
-    <div class="container main">
-      <div class="container" v-for="card in cards" :key="card.id">
-        <h1>Moj profil</h1>
-        <h3>id: {{ card.id }}</h3>
-        <h3>Ime: {{ card.name }}</h3>
-        <div class="container justify-content.center">
-          <img class="container profil" :src="card.url" />
-        </div>
-
-        <h3>Broj telefona: {{ card.telephone }}</h3>
-        <h3>O meni: {{ card.description }}</h3>
-      </div>
-    </div>
-    -->
+    <div class="b-example-divider"></div>
     <div class="container-fluid pacijenti">
-      <h2>NARUČENI PACIJENTI</h2>
+      <div class="container naslov">
+        <h2 style="color: rgb(0, 0, 0)">NARUČENI PACIJENTI</h2>
+      </div>
       <div class="container termini" v-for="rez in rezerve" :key="rez.docid">
         <h2>Naručeni:</h2>
-        <h1>ime: {{ rez.name }}</h1>
-        <h2>odabrane usluge : {{ rez.usluge }}</h2>
-        <h3>dan : {{ rez.dan }}</h3>
-        <h3>Vrijeme termina : {{ rez.vrijeme }}</h3>
+        <h1>{{ rez.name }}</h1>
+        <h2>Za {{ rez.usluge }}</h2>
+        <h3>U {{ rez.dan }} u {{ rez.vrijeme }}</h3>
       </div>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
+.naslov {
+  padding: 20px;
+}
+
 .pacijenti {
-  background-color: rgb(226, 224, 224);
+  background-color: rgb(243, 243, 243);
   border-top: solid rgb(219, 215, 215);
   color: rgb(85, 75, 63);
+  text-decoration: bold;
 }
 
 .id {
@@ -89,8 +81,9 @@
 
 .termini {
   border: double black;
-  padding: 50px 0px;
+  padding: 30px;
   border-radius: 5%;
+  background-color: white;
 }
 
 .profil {
@@ -197,7 +190,7 @@ export default {
             dan: data.dani,
             time: data.posted_at,
             vrijeme: data.vrijeme,
-            usluge: data.usluge,
+            usluge: data.usluge.join(" i "),
             docid: data.docid,
           };
 

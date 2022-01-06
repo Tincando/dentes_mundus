@@ -3,13 +3,13 @@
     <h2>Ostavi mišljenje:</h2>
     <div class="divider"></div>
     <div class="container review" v-for="review in reviews" :key="review.code">
-      <h4 class="uppercase">Customer Reviews</h4>
+      <h4 class="uppercase">Customer Review</h4>
       <h5>Ocjena: {{ review.ocjena }}</h5>
       <div class="reviews">
-        <p>{{ review.reviewer }}</p>
+        <p>{{ review.content }}</p>
         <div class="row">
           <div class="columns medium-7">
-            <h5>{{ review.content }}</h5>
+            <h5>{{ review.reviewer }}</h5>
           </div>
           <div class="columns medium-5">
             <h5 class="pull-right">{{ review.time }}</h5>
@@ -61,6 +61,17 @@
 </template>
 
 <style scoped>
+.form-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: url("~@/assets/real-logo.png");
+
+  cursor: pointer;
+}
+
 .divider {
   height: 25px;
 }
@@ -69,10 +80,11 @@
   padding: 0 20px;
 }
 .review {
-  border: 1px solid #ddd;
+  border: 1px solid rgb(0, 0, 0);
   font-size: 0.95em;
   padding: 10px;
   margin: 15px 0 5px 0;
+  background-color: white;
 }
 .review h5 {
   text-transform: uppercase;
