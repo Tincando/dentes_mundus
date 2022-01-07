@@ -51,6 +51,7 @@
 
             <li class="nav-item px-2">
               <router-link
+                v-if="store.Userrole && store.currentUser"
                 :to="{
                   name: 'Profil',
                   params: { userid: store.currentUserid },
@@ -59,16 +60,24 @@
                 Profil
               </router-link>
             </li>
+            <li class="nav-item px-2">
+              <router-link
+                to="/odabir"
+                v-if="!store.Userrole && store.currentUser"
+                >Doktori</router-link
+              >
+            </li>
             <!-- ovo ce vjerovatno bit izbrisi profil -->
             <li class="nav-item px-2"></li>
           </ul>
 
           <div class="col-md-9 text-end">
-            <a
+            <router-link
+              to="/Signin"
               v-if="!store.currentUser"
               type="button"
               class="btn btn-outline-primary login"
-              ><router-link to="/Signin">Login</router-link></a
+              >Login</router-link
             >
             <a v-if="!store.currentUser" type="button" class="btn btn-primary"
               ><router-link
@@ -125,10 +134,11 @@ a:hover {
   color: rgb(96, 193, 231);
   border-color: rgb(96, 193, 231);
 }
+
 .login:hover {
-  background-color: rgb(214, 83, 83);
-  color: white;
-  border-color: black;
+  background-color: transparent;
+  color: rgb(96, 193, 231);
+  border-color: rgb(96, 193, 231);
 }
 
 .navbar-nav {

@@ -17,7 +17,9 @@
       </div>
       <div class="container-uvod" v-else>
         <h1>ODABERI SVOJ TERMIN?</h1>
-        <router-link to="/about" class="btn btn-lg"> Klikni ovdje </router-link>
+        <router-link to="/odabir" class="btn btn-lg">
+          Klikni ovdje
+        </router-link>
       </div>
       <img class="img-fluid" src="@/assets/backtest3.jpg" width="100%" />
     </div>

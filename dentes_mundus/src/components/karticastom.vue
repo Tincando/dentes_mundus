@@ -11,15 +11,10 @@
     </p>
     <div class="d-flex justify-content-between align-items-center">
       <div class="btn-group">
-        <div class="card-footer text-muted text-left"></div>
-        <a type="button" class="btn btn-sm btn-outline-secondary"
-          ><router-link to="/Termin">View</router-link></a
-        >
-        <button type="button" class="btn btn-sm btn-outline-secondary">
-          Edit
-        </button>
+        <div class="card-footer text-muted text-left">
+          ocjena: {{ info.prosjek }}
+        </div>
       </div>
-      <small class="text-muted">{{ info.time }}</small>
     </div>
   </div>
 </template>
@@ -27,8 +22,8 @@
 .kutia {
   height: 250px;
   width: 250px;
-  border-radius: 25px;
-  border: 2px solid rgb(177, 237, 255);
+  border-radius: 50%;
+  border: 5px solid rgb(255, 255, 255);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 </style>

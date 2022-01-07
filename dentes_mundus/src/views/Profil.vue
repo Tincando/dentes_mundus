@@ -31,6 +31,9 @@
       <div class="container naslov">
         <h2 style="color: rgb(0, 0, 0)">NARUČENI PACIJENTI</h2>
       </div>
+      <div class="container nema" v-if="!this.rezerve.length">
+        <h1>Trenutno nema naručenih pacijenata</h1>
+      </div>
       <div class="container termini" v-for="rez in rezerve" :key="rez.docid">
         <h2>Naručeni:</h2>
         <h1>{{ rez.name }}</h1>
@@ -41,6 +44,10 @@
   </div>
 </template>
 <style lang="scss" scoped>
+.nema {
+  padding: 20px;
+}
+
 .naslov {
   padding: 20px;
 }

@@ -181,37 +181,37 @@ export default {
       const auth = getAuth();
 
       if (this.password != this.passwordRepeat) {
-        alert("lozinke nisu jednake");
+        alert("Lozinke nisu jednake");
       } else {
         createUserWithEmailAndPassword(auth, this.email, this.password)
-          .then(function () {
+          .then((e) => {
+            addDoc(collection(db, "doktori"), {
+              name: this.name,
+              url: this.newImageUrl,
+              posted_at: Date.now(),
+              description: this.description,
+              telephone: this.telephone,
+              adress: this.adress,
+              email: this.email,
+              role: "doc",
+            })
+              .then((doc) => {
+                console.log("Spremljeno", doc);
+                this.newImageUrl = "";
+                this.ime = "";
+                this.description = "";
+                this.telephone = "";
+                this.adress = "";
+              })
+              .catch((e) => {
+                console.log(e);
+              });
             console.log("Uspješna registracija");
           })
           .catch(function (error) {
             console.error("Došlo je do greške", alert(error));
           });
       }
-      addDoc(collection(db, "doktori"), {
-        name: this.name,
-        url: this.newImageUrl,
-        posted_at: Date.now(),
-        description: this.description,
-        telephone: this.telephone,
-        adress: this.adress,
-        email: this.email,
-        role: "doc",
-      })
-        .then((doc) => {
-          console.log("Spremljeno", doc);
-          this.newImageUrl = "";
-          this.ime = "";
-          this.description = "";
-          this.telephone = "";
-          this.adress = "";
-        })
-        .catch((e) => {
-          console.log(e);
-        });
     },
   },
 };
