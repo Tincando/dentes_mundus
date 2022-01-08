@@ -137,12 +137,12 @@ export default {
         dani: this.dani,
         posted_at: Date.now(),
         vrijeme: this.vrijeme,
-        usluge: this.usluge,
+        usluge: this.usluge.join(" i "),
         docid: this.id,
       })
         .then((doc) => {
           console.log("Spremljeno", doc);
-          (this.dani = ""), (this.vrijeme = ""), (this.usluge = "");
+          (this.dani = ""), (this.vrijeme = ""), (this.usluge = []);
         })
         .catch((e) => {
           console.log(e);

@@ -26,6 +26,8 @@
   padding: 50px;
   background-image: url("~@/assets/zivot.jpg");
   color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 4px #000000;
 }
 </style>
 

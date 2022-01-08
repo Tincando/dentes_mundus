@@ -34,11 +34,14 @@
       <div class="container nema" v-if="!this.rezerve.length">
         <h1>Trenutno nema naručenih pacijenata</h1>
       </div>
-      <div class="container termini" v-for="rez in rezerve" :key="rez.docid">
+      <div class="container termini" v-for="rez in rezerve" :key="rez.id">
         <h2>Naručeni:</h2>
         <h1>{{ rez.name }}</h1>
         <h2>Za {{ rez.usluge }}</h2>
         <h3>U {{ rez.dan }} u {{ rez.vrijeme }}</h3>
+        <button @click="brisi(rez.id)" class="btn btn-primary btn-lg">
+          Obavljeno
+        </button>
       </div>
     </div>
   </div>
@@ -128,7 +131,19 @@
 
 <script>
 import store from "@/store.js";
-import { collection, getDocs, db } from "@/firebase";
+import {
+  collection,
+  getDocs,
+  db,
+  doc,
+  deleteDoc,
+  getDatabase,
+  ref,
+  where,
+  get,
+  query,
+  onSnapshot,
+} from "@/firebase";
 
 export default {
   name: "Profil",
@@ -139,11 +154,38 @@ export default {
       cards: [],
       pacijenti: [],
       rezerve: [],
+      reviews: [],
     };
   },
+
   mounted() {
+    console.log("firebase dohvat...");
+
+    const q = query(collection(db, "rezervacije"));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let rezerve = [];
+      querySnapshot.forEach((doc) => {
+        let id = doc.id;
+        let data = doc.data();
+
+        let card = {
+          id: doc.id,
+          name: data.name,
+          dan: data.dani,
+          time: data.posted_at,
+          vrijeme: data.vrijeme,
+          usluge: data.usluge,
+          docid: data.docid,
+        };
+        if (store.docid == card.docid) {
+          rezerve.push(card);
+        }
+      });
+      this.rezerve = rezerve;
+    });
     this.getPosts();
-    this.getrezervacije();
+    //this.getrezervacije();
   },
   methods: {
     getPosts() {
@@ -180,7 +222,7 @@ export default {
         });
       });
     },
-    getrezervacije() {
+    /* getrezervacije() {
       let rez = [];
 
       console.log("firebase dohvat...");
@@ -193,6 +235,7 @@ export default {
           let data = doc.data();
 
           let card = {
+            id: doc.id,
             name: data.name,
             dan: data.dani,
             time: data.posted_at,
@@ -211,6 +254,41 @@ export default {
         });
       });
     },
+    */
+    brisi(id) {
+      console.log(id);
+
+      const test = doc(db, "rezervacije", id);
+
+      deleteDoc(test);
+    },
+  },
+
+  getrezervacije() {
+    console.log("firebase dohvat...");
+
+    const q = query(collection(db, "rezervacije"));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let rezerve = [];
+      querySnapshot.forEach((doc) => {
+        let id = doc.id;
+        let data = doc.data();
+
+        let card = {
+          id: doc.id,
+          name: data.name,
+          dan: data.dani,
+          time: data.posted_at,
+          vrijeme: data.vrijeme,
+          usluge: data.usluge.join(" i "),
+          docid: data.docid,
+        };
+
+        rezerve.push(card);
+      });
+      this.rezerve = rezerve;
+    });
   },
 };
 </script>
