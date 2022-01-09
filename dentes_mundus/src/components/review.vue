@@ -29,6 +29,7 @@
           min="1"
           max="5"
           id="customRange2"
+          required
         />
 
         <div class="mb-3">
@@ -40,6 +41,7 @@
               class="form-control"
               rows="3"
               cols="100"
+              required
             ></textarea>
           </label>
         </div>
@@ -51,6 +53,7 @@
               class="form-control"
               v-model="reviewer"
               type="text"
+              required
             />
           </label>
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -247,6 +250,7 @@ export default {
           time: new Date().toLocaleDateString(),
           ocjena: data.ocjena,
         };
+
         if (review.id == this.id) {
           this.reviews.unshift(review);
         }

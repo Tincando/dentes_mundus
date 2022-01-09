@@ -1,8 +1,12 @@
 
 <template>
   <div class="col-lg-4">
-    <img class="kutia" :src="info.url" />
-    <p style="text-align: center">{{ info.name }}</p>
+    <router-link :to="{ name: 'Termin', params: { cardid: info.id } }">
+      <img class="kutia" :src="info.url"
+    /></router-link>
+    <p style="text-align: center; text-transform: uppercase">
+      {{ info.name }}
+    </p>
     <p class="card-text">
       {{ info.description }}
       <router-link :to="{ name: 'Termin', params: { cardid: info.id } }">
@@ -25,6 +29,11 @@
   border-radius: 50%;
   border: 5px solid rgb(255, 255, 255);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.kutia:hover {
+  box-shadow: none;
+  height: 245px;
+  width: 245px;
 }
 </style>
 

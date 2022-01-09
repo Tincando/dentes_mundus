@@ -12,7 +12,7 @@
             :max="this.today"
           />
           -->
-        <div class="container">
+        <div class="container dan">
           <label class="form-select-label" for="form-select">
             Odaberi Dan
           </label>
@@ -30,7 +30,7 @@
             <option value="Nedjelja">Nedjelja</option>
           </select>
         </div>
-        <div class="container">
+        <div class="container vrijeme">
           <input
             class="appt-time"
             id="appt-time"
@@ -54,7 +54,7 @@
             v-model="usluge"
           />
           <label class="form-check-label" for="flexCheckDefault">
-            Pregled cijena : 100 kn
+            Pregled
           </label>
         </div>
         <div class="form-check">
@@ -69,16 +69,64 @@
             >Hitnoća
           </label>
         </div>
-        <button class="btn btn-primary" type="submit">klikni</button>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="Bijela plomba"
+            id="flexCheckChecked"
+            v-model="usluge"
+          />
+          <label class="form-check-label" for="flexCheckChecked"
+            >Bijela Plomba
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="Amalgam"
+            id="flexCheckChecked"
+            v-model="usluge"
+          />
+          <label class="form-check-label" for="flexCheckChecked"
+            >Amalgam
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="Zdrastveno osiguranje"
+            id="flexCheckChecked"
+            v-model="usluge"
+          />
+          <label class="form-check-label" for="flexCheckChecked"
+            >Imam Zdravsteno Osiguranje
+          </label>
+        </div>
       </div>
+      <button class="btn btn-primary btn-lg" type="submit">Potvrdi</button>
     </form>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.appt-time {
+  margin: 20px;
+}
+.dan {
+  padding-bottom: 30px;
+}
+.vrijeme {
+  padding-bottom: 35px;
+}
 div {
   margin-bottom: 10px;
   position: relative;
+}
+.usluge {
+  padding: 30px;
 }
 
 input[type="number"] {
@@ -143,6 +191,7 @@ export default {
         .then((doc) => {
           console.log("Spremljeno", doc);
           (this.dani = ""), (this.vrijeme = ""), (this.usluge = []);
+          alert("Vaša rezervacija je uspješno obavljena!Vidimo se");
         })
         .catch((e) => {
           console.log(e);

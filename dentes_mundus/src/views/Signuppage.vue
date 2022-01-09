@@ -65,6 +65,13 @@
 .but {
   padding: 150px 100px 20px 100px;
 }
+.btn {
+  box-shadow: 0px 7px 24px 13px rgba(0, 0, 0, 0.51);
+}
+.btn:hover {
+  box-shadow: none;
+}
+
 .pacijent:hover {
   filter: grayscale(0%);
 }

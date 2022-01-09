@@ -9,7 +9,7 @@
             <img src="@/assets/zub1.png" width="60px" />
             <h1>Sign up forma za Doktora</h1>
             <div class="divider" />
-            <form>
+            <form class="form-group" @submit.prevent="signup">
               <div class="form-group">
                 <label for="exampleInputEmail1" class="form-label"
                   >Email address</label
@@ -57,6 +57,7 @@
                   id="Ime"
                   aria-describedby="ime"
                   placeholder="ime"
+                  required
                 />
               </div>
               <div class="mb-3">
@@ -67,6 +68,7 @@
                   class="form-control ml-2"
                   placeholder="Enter the image URL"
                   id="imageUrl"
+                  required
                 />
               </div>
               <div class="form-group">
@@ -87,6 +89,7 @@
                   class="form-control ml-2"
                   placeholder="Enter telephone number"
                   id="telephone"
+                  required
                 />
               </div>
               <div class="form-group">
@@ -97,12 +100,11 @@
                   class="form-control ml-2"
                   placeholder="Enter adress"
                   id="adress"
+                  required
                 />
               </div>
               <div class="divider" />
-              <button type="button" @click="signup" class="btn btn-primary">
-                Sign up
-              </button>
+              <button type="submit" class="btn btn-primary">Sign up</button>
             </form>
           </div>
         </div>
