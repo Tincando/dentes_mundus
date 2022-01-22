@@ -16,19 +16,16 @@ U aplikaciji se prije prijave može odabrati dali ste doktor ili se prijavljujet
 - Prijava/registracija i odjava
   -Prijava/registracija doktora
   -Prijava/registracija pacijenta
-- Dodavanje i brisanje doktora
-  - Mogućnost pregleda svakog doktora
+- Mogućnost pregleda svakog doktora
     - Mogućnost pregleda termina i usluga svakog doktora
 - Mogućnost da doktor pregleda trenutne rezervacije
-- Pretraga Doktora
-  - Unos imena Doktora
 - Ostavljanje komentara za pojedinog doktora
   - ocjena usluge
 - Odabir željenog termina i usluga
 - Top 3 najbolje ocjenjena doktora trenutno
 
-[Link na prototip aplikacije](nemam još)<br />
-[Link na aplikaciju](nemam još)
+[Link na prototip aplikacije](https://www.figma.com/proto/tAtlJbTum8CkgprALXo26o/Untitled?node-id=10%3A18&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=10%3A18&show-proto-sidebar=1)<br />
+[Link na aplikaciju](https://dentes-mundus.netlify.app/)
 
 ## Test user
 
