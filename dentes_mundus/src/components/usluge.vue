@@ -136,7 +136,7 @@ input[type="number"] {
 
 <script>
 import store from "@/store";
-import { collection, addDoc, db } from "@/firebase";
+import { collection, addDoc, db, getDocs } from "@/firebase";
 export default {
   name: "usluge",
 
@@ -149,17 +149,19 @@ export default {
       today: "",
       sat: "",
       datum: "",
+      rezerve: [],
       id: this.$route.params.cardid,
     };
   },
   mounted() {
     this.getcurrenttime();
+    this.dohvatrezervacija();
 
     var today = new Date();
     var day = today.getDay();
 
     var dd = today.getDate() + 10;
-    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+    var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
     var hh = today.getHours();
     if (dd < 10) {
@@ -180,22 +182,55 @@ export default {
 
   methods: {
     dodajuslugu() {
-      addDoc(collection(db, "rezervacije"), {
-        name: store.currentUser,
-        dani: this.dani,
-        posted_at: Date.now(),
-        vrijeme: this.vrijeme,
-        usluge: this.usluge.join(" i "),
-        docid: this.id,
-      })
-        .then((doc) => {
-          console.log("Spremljeno", doc);
-          (this.dani = ""), (this.vrijeme = ""), (this.usluge = []);
-          alert("Vaša rezervacija je uspješno obavljena!Vidimo se");
+      let postoji = 0;
+
+      this.rezerve.forEach((el) => {
+        if (this.dani == el.dani && this.vrijeme == el.vrijeme) {
+          postoji++;
+        }
+      });
+      if (postoji == 0) {
+        addDoc(collection(db, "rezervacije"), {
+          name: store.currentUser,
+          dani: this.dani,
+          posted_at: Date.now(),
+          vrijeme: this.vrijeme,
+          usluge: this.usluge.join(" i "),
+          docid: this.id,
         })
-        .catch((e) => {
-          console.log(e);
+          .then((doc) => {
+            console.log("Spremljeno", doc);
+            (this.dani = ""), (this.vrijeme = ""), (this.usluge = []);
+            alert("Vaša rezervacija je uspješno obavljena!Vidimo se");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      } else {
+        alert("Odabrani termin je zauzet molim birajte ponovno");
+      }
+    },
+
+    dohvatrezervacija() {
+      const test = getDocs(collection(db, "rezervacije"));
+
+      test.then((results) => {
+        results.forEach((doc) => {
+          let id = doc.id;
+          let data = doc.data();
+
+          let card = {
+            name: data.name,
+            dani: data.dani,
+            vrijeme: data.vrijeme,
+            usluge: data.usluge,
+            docid: data.docid,
+          };
+          if (this.id == card.docid) {
+            this.rezerve.push(card);
+          }
         });
+      });
     },
 
     gettest() {
@@ -207,7 +242,7 @@ export default {
       var day = today.getDay();
 
       var dd = today.getDate() + 1;
-      var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+      var mm = today.getMonth() + 1;
       var yyyy = today.getFullYear();
       var hh = today.getHours();
       if (dd < 10) {
@@ -232,7 +267,7 @@ export default {
       var day = today.getDay();
 
       var dd = today.getDate();
-      var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+      var mm = today.getMonth() + 1;
       var yyyy = today.getFullYear();
       var hh = today.getHours();
       if (dd < 10) {
