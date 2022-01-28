@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <form class="form-group" @submit.prevent="dodajuslugu">
-      <h2>Rezerviraj Termin :</h2>
       <div class="container usluge">
+        <h2>Rezerviraj Termin :</h2>
         <!-- test sa kalendarom
           <input
             v-model="datum"
@@ -20,6 +20,7 @@
             class="form-select"
             v-model="dani"
             aria-label="Default select example"
+            required
           >
             <option selected>Open this select menu</option>
             <option value="Ponedjeljak">Ponedjeljak</option>
@@ -39,6 +40,7 @@
             min="08:00"
             max="18:00"
             v-model="vrijeme"
+            required
           />
           <label class="form*time-label" for="appt-time">
             Radno vrijeme je od : 08:00 do 18:00
@@ -105,8 +107,8 @@
             >Imam Zdravsteno Osiguranje
           </label>
         </div>
+        <button class="btn btn-primary btn-lg" type="submit">Potvrdi</button>
       </div>
-      <button class="btn btn-primary btn-lg" type="submit">Potvrdi</button>
     </form>
   </div>
 </template>
@@ -126,7 +128,10 @@ div {
   position: relative;
 }
 .usluge {
-  padding: 30px;
+  border: 1px solid rgb(124, 124, 124);
+  padding: 100px 50px 50px 100px;
+  background-color: white;
+  box-shadow: 0px 7px 24px 13px rgba(0, 0, 0, 0.51);
 }
 
 input[type="number"] {

@@ -83,7 +83,7 @@
   padding: 0 20px;
 }
 .review {
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(141, 141, 141);
   font-size: 0.95em;
   padding: 10px;
   margin: 15px 0 5px 0;

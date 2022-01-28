@@ -11,7 +11,7 @@
         <h1>{{ card.name }}</h1>
         <h3>{{ card.description }}</h3>
       </div>
-      <div class="container d-flex justify-content-between info">
+      <div class="container-fluid d-flex justify-content-between">
         <div class="p2">
           <img src="@/assets/mapa.png" width="20px" />
           <h4>{{ card.adress }}</h4>
@@ -28,27 +28,23 @@
     </div>
     <div class="b-example-divider"></div>
     <div class="container-fluid pacijenti">
-      <div class="container">
-        <div class="container rez">
-          <usluge></usluge>
-        </div>
-        <hr class="featurette-divider" />
-        <div class="rev">
-          <review></review>
-        </div>
+      <div class="container rez">
+        <div class="divider" />
+        <usluge></usluge>
         <div class="divider" />
       </div>
+      <hr class="featurette-divider" />
+      <div class="rev">
+        <review></review>
+      </div>
+      <div class="divider" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .rev {
-  padding: 50px 250px;
-}
-
-.rez {
-  padding: 80px 150px;
+  padding: 50px;
 }
 
 .id h1 {
