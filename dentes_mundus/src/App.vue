@@ -216,7 +216,7 @@ export default {
     };
   },
   beforeUpdate() {
-    this.test123();
+    this.provjerarola();
   },
 
   methods: {
@@ -225,7 +225,7 @@ export default {
         this.$router.push({ name: "Sigin" });
       });
     },
-    test123() {
+    provjerarola() {
       console.log("firebase dohvat...");
 
       const q = query(collection(db, "doktori"));

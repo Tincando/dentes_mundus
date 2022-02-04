@@ -155,10 +155,10 @@ export default {
   },
 */
   mounted() {
-    this.getPosts();
+    this.getDoctor();
   },
   methods: {
-    getPosts() {
+    getDoctor() {
       let cards = [];
 
       console.log("firebase dohvat...");
